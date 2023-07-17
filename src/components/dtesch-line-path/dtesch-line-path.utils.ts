@@ -11,7 +11,7 @@ export type ElementCoords = {
   height: number;
 };
 
-export type LineDirection = "right-bottom" | "right-top" | "left-bottom" | "left-top" | "straight";
+export type LineDirection = 'right-bottom' | 'right-top' | 'left-bottom' | 'left-top' | 'straight';
 
 export type GetContainerParams = {
   lineCoords: LineCoords;
@@ -23,7 +23,7 @@ function getElementCoords(id: string): ElementCoords {
   try {
     const startElement = document.getElementById(id);
 
-    if (!startElement) throw new Error("Element not found");
+    if (!startElement) throw new Error('Element not found');
 
     const scrollY = window.scrollY;
     const scrollX = window.scrollX;
@@ -40,7 +40,7 @@ function getElementCoords(id: string): ElementCoords {
 function getLineStartingPoint(coords: ElementCoords, direction: LineDirection) {
   const { x, y, width, height } = coords;
 
-  const isToLeft = direction.includes("left");
+  const isToLeft = direction.includes('left');
 
   const elementHalfHeight = height / 2;
 
@@ -56,7 +56,7 @@ function getLineStartingPoint(coords: ElementCoords, direction: LineDirection) {
 function getLineEndingPoint(coords: ElementCoords, direction: LineDirection) {
   const { x, y, width, height } = coords;
 
-  const isToLeft = direction.includes("left");
+  const isToLeft = direction.includes('left');
 
   const elementHalfHeight = height / 2;
 
@@ -83,15 +83,22 @@ function getLineStartEndCoords(startPointId: string, endPointId: string): LineCo
 function getLineDirection(lineCoords: LineCoords): LineDirection {
   const { start, end } = lineCoords;
 
-  if (start.x < end.x && start.y < end.y) return "right-bottom";
+  switch (true) {
+    case start.x < end.x && start.y < end.y:
+      return 'right-bottom';
 
-  if (start.x < end.x && start.y > end.y) return "right-top";
+    case start.x < end.x && start.y > end.y:
+      return 'right-top';
 
-  if (start.x > end.x && start.y < end.y) return "left-bottom";
+    case start.x > end.x && start.y < end.y:
+      return 'left-bottom';
 
-  if (start.x > end.x && start.y > end.y) return "left-top";
+    case start.x > end.x && start.y > end.y:
+      return 'left-top';
 
-  return "straight";
+    default:
+      return 'straight';
+  }
 }
 
 function diff(a: number, b: number) {
@@ -111,25 +118,25 @@ function getPathPoints(lineCoords: LineCoords) {
   const boxHeightWithOffset = boxHeight + yStartWithOffsetHalf;
 
   const pathPoints: { [key in LineDirection]: Array<{ x: number; y: number }> } = {
-    "right-bottom": [
+    'right-bottom': [
       { x: 0, y: yStartWithOffsetHalf },
       { x: boxWidthHalf, y: yStartWithOffsetHalf },
       { x: boxWidthHalf, y: boxHeightWithOffset },
       { x: boxWidth, y: boxHeightWithOffset },
     ],
-    "right-top": [
+    'right-top': [
       { x: 0, y: boxHeightWithOffset },
       { x: boxWidthHalf, y: boxHeightWithOffset },
       { x: boxWidthHalf, y: yStartWithOffsetHalf },
       { x: boxWidth, y: yStartWithOffsetHalf },
     ],
-    "left-bottom": [
+    'left-bottom': [
       { x: boxWidth, y: yStartWithOffsetHalf },
       { x: boxWidthHalf, y: yStartWithOffsetHalf },
       { x: boxWidthHalf, y: boxHeightWithOffset },
       { x: 0, y: boxHeightWithOffset },
     ],
-    "left-top": [
+    'left-top': [
       { x: boxWidth, y: boxHeightWithOffset },
       { x: boxWidthHalf, y: boxHeightWithOffset },
       { x: boxWidthHalf, y: yStartWithOffsetHalf },
@@ -152,25 +159,25 @@ function getContainerProps(params: GetContainerParams) {
   const heightWithOffset = height + LOOSE_OFFSET;
 
   const props: { [key in LineDirection]: { top: number; left: number; width: number; height: number } } = {
-    "left-bottom": {
+    'left-bottom': {
       top: start.y - LOOSE_OFFSET / 2,
       left: end.x,
       width,
       height: heightWithOffset,
     },
-    "left-top": {
+    'left-top': {
       top: end.y - LOOSE_OFFSET / 2,
       left: end.x,
       width,
       height: heightWithOffset,
     },
-    "right-bottom": {
+    'right-bottom': {
       top: start.y - LOOSE_OFFSET / 2,
       left: start.x,
       width,
       height: heightWithOffset,
     },
-    "right-top": {
+    'right-top': {
       top: end.y - LOOSE_OFFSET / 2,
       left: start.x,
       width,
