@@ -1,6 +1,8 @@
-import data from '../../bracket-data.json';
+import data from '../../../bracket-data.json';
 
-type Bracket = (typeof data)[0];
+export const TEAM_COUNT = 8;
+
+export type Bracket = (typeof data)[0];
 
 export function aggByRound(bracket: Array<Bracket>) {
   return bracket.reduce(
@@ -18,8 +20,6 @@ export function aggByRound(bracket: Array<Bracket>) {
     { 1: [] } as Record<number, Array<Bracket>>
   );
 }
-
-export const TEAM_COUNT = 8;
 
 export function generateArrayOfNumbers(count: number) {
   return Array.from({ length: count }, (_, index) => index + 1);
@@ -45,8 +45,8 @@ export function getNumberOfRounds(teamsCount = TEAM_COUNT) {
   return rounds;
 }
 
-export function generateRounds() {
-  return generateArrayOfNumbers(getNumberOfRounds(TEAM_COUNT));
+export function generateRounds(teamsCount = TEAM_COUNT) {
+  return generateArrayOfNumbers(getNumberOfRounds(teamsCount));
 }
 
 export function lineCoords() {
