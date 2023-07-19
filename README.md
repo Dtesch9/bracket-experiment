@@ -1,4 +1,4 @@
-# bracket-experiment
+# Single elimination brackets
 
 # Run
 
