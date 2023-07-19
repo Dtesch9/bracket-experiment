@@ -1,12 +1,12 @@
-import { useLayoutEffect, useState } from "react";
-import { getBoxMeasurements, type BoxMeasurements } from "./dtesch-line-path.utils";
+import { useLayoutEffect, useState } from 'react';
+import { getBoxMeasurements, type BoxMeasurements } from './dtesch-path-line.utils';
 
-type UseLinePathMeasurementsParams = {
+type UsePathLineMeasurementsParams = {
   startPointId: string;
   endPointId: string;
 };
 
-export const useLinePathMeasurements = ({ startPointId, endPointId }: UseLinePathMeasurementsParams) => {
+export const usePathLineMeasurements = ({ startPointId, endPointId }: UsePathLineMeasurementsParams) => {
   const [boxMeasurements, setBoxMeasurements] = useState<BoxMeasurements>({
     start: { x: 0, y: 0 },
     end: { x: 0, y: 0 },
@@ -23,9 +23,9 @@ export const useLinePathMeasurements = ({ startPointId, endPointId }: UseLinePat
 
     updatePoints();
 
-    window.addEventListener("resize", updatePoints);
+    window.addEventListener('resize', updatePoints);
 
-    return () => window.removeEventListener("resize", updatePoints);
+    return () => window.removeEventListener('resize', updatePoints);
   }, [endPointId, startPointId]);
 
   return boxMeasurements;

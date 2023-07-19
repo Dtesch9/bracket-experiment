@@ -1,15 +1,15 @@
-import { Flex } from "@chakra-ui/react";
-import { PathLine } from "../path-line";
-import { useLinePathMeasurements } from "./dtesch-line-path.hooks";
+import { Flex } from '@chakra-ui/react';
+import { PathLine } from '../path-line';
+import { usePathLineMeasurements } from './dtesch-path-line.hooks';
 
-type DTeschLinePathProps = {
+type DTeschPathLineProps = {
   startPointId: string;
   endPointId: string;
   color?: string;
 };
 
-export const DTeschLinePath = ({ startPointId, endPointId, color = "red" }: DTeschLinePathProps) => {
-  const boxMeasurements = useLinePathMeasurements({ startPointId, endPointId });
+export const DTeschPathLine = ({ startPointId, endPointId, color = 'red' }: DTeschPathLineProps) => {
+  const boxMeasurements = usePathLineMeasurements({ startPointId, endPointId });
 
   return (
     <Flex

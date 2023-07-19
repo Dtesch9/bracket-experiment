@@ -1,6 +1,6 @@
 import { Flex, FlexProps, Tag } from '@chakra-ui/react';
 import { Fragment, useMemo } from 'react';
-import { DTeschLinePath } from '../dtesch-line-path';
+import { DTeschPathLine } from '../dtesch-path-line';
 import { TEAM_COUNT, generateRounds, lineCoords, generateMatchesFromRoundIndex, aggByRound } from './brackets.utils';
 import type { Bracket } from './brackets.utils';
 
@@ -54,7 +54,7 @@ export const Brackets = ({ data, children, bracketWidth }: BracketsProps) => {
                   return (
                     <Fragment key={`${id}-${TEAM_COUNT}`}>
                       {lineCoord && (
-                        <DTeschLinePath
+                        <DTeschPathLine
                           startPointId={lineCoord.start}
                           endPointId={lineCoord.end}
                           color="rgba(65, 65, 66, 1)"
